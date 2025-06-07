@@ -1,0 +1,108 @@
+<named colors css>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الألوان المسمّاة</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+      direction: rtl;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .colors {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+    }
+    .color-box {
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .color-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .color-name {
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    .copied {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 List of named colors in CSS</h1>
+  <br>
+  <h2>✂️ Click on any color and it will be copied automatically</h2>
+  <div class="copied" id="copied">✅ copied!</div>
+  <div class="colors" id="colors"></div>
+
+  <script>
+    const namedColors = [
+      "black","dimgray","gray","darkgray","silver","lightgray","gainsboro","whitesmoke","white",
+      "rosybrown","indianred","brown","firebrick","maroon","darkred","red","mistyrose","salmon",
+      "darksalmon","lightsalmon","lightcoral","crimson","orangered","tomato","coral","darkorange",
+      "orange","sandybrown","darkgoldenrod","goldenrod","gold","peachpuff","navajowhite","moccasin",
+      "bisque","wheat","burlywood","tan","peru","chocolate","saddlebrown","sienna","snow",
+      "seashell","linen","antiquewhite","oldlace","floralwhite","ivory","beige","cornsilk",
+      "khaki","darkkhaki","palegoldenrod","blanchedalmond","lemonchiffon","lightgoldenrodyellow",
+      "lightyellow","yellow","olive","darkolivegreen","olivedrab","yellowgreen","limegreen",
+      "lime","lawngreen","chartreuse","greenyellow","springgreen","mediumspringgreen",
+      "lightgreen","palegreen","darkseagreen","mediumseagreen","seagreen","forestgreen",
+      "green","darkgreen","honeydew","mintcream","darkcyan","cyan","aqua","lightcyan",
+      "paleturquoise","aquamarine","turquoise","mediumturquoise","darkturquoise","lightseagreen",
+      "cadetblue","powderblue","lightblue","skyblue","lightskyblue","deepskyblue","dodgerblue",
+      "cornflowerblue","steelblue","royalblue","blue","mediumblue","darkblue","navy",
+      "midnightblue","lavender","ghostwhite","aliceblue","azure","lightsteelblue",
+      "lightSlateGray","slategray","darkslategray","rebeccapurple","slateblue","mediumslateblue",
+      "mediumpurple","blueviolet","indigo","darkorchid","darkviolet","mediumorchid","purple",
+      "darkmagenta","fuchsia","violet","plum","orchid","mediumvioletred","deeppink","hotpink",
+      "lightpink","pink","thistle","magenta"
+    ];
+
+    const container = document.getElementById("colors");
+    const copied = document.getElementById("copied");
+
+    namedColors.forEach(color => {
+      const box = document.createElement("div");
+      box.className = "color-box";
+      box.style.background = color;
+      box.innerHTML = `<div class="color-name">${color}</div>`;
+
+      box.onclick = () => {
+        navigator.clipboard.writeText(color);
+        copied.style.display = 'block';
+        setTimeout(() => copied.style.display = 'none', 1500);
+      };
+
+      container.appendChild(box);
+    });
+  </script>
+</body>
+</html>
+
